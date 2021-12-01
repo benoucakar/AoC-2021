@@ -18,6 +18,3 @@ def count_increase(sez):
 
 print("1. del: " + str(count_increase(meritve)))
 print("2. del: " + str(count_increase(okna)))
-
-
-
