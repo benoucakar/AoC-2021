@@ -50,6 +50,8 @@ def napolni_svet(podatki):
 vred1 = sum(1 for n in napolni_svet(hor_vert).values() if n >= 2)
 vred2 = sum(1 for n in napolni_svet(data).values() if n >= 2)
 
+# --------------------------
+
 print("1. del: ")
 print(vred1)
 print("2. del: ")

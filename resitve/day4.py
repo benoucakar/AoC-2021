@@ -10,17 +10,17 @@ class Bingo:
                     self.spomin[i][j] = True
     def preveri(self):
         for i in range(5):
-            if all(self.spomin[i]) == True:
+            if all(self.spomin[i]):
                 return True
         for j in range(5):
-            if all([L[j] for L in self.spomin]) == True:
+            if all([L[j] for L in self.spomin]):
                 return True
         return False
     def score(self, stv):
         acc = 0
         for i in range(5):
             for j in range(5):
-                if self.spomin[i][j] == False:
+                if not self.spomin[i][j]:
                     acc += self.karta[i][j]
         return acc*stv
 
@@ -54,13 +54,11 @@ for num in stevila:
             polje.done = True
             win_scores.append(polje.score(num))
 
+# --------------------------
+
 print("1. del: ")
 print(win_scores[0])
 print("2. del: ")
 print(win_scores[-1])
     
     
-
-
-#print([x.spomin for x in polja])
-
