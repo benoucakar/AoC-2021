@@ -14,56 +14,32 @@ with open("input/day12.txt") as inp:
         elif "end" in temp:
             map.append((temp[0],temp[1]))
 
-def ze_v_poti(p, pot):
-    if len(pot) < 2:
-        return False
-    else:
-        for i in range(len(pot)-1):
-            if p == (pot[i],pot[i+1]):
-                return True
-        return False
-
-def search1(pot):
+def search(pot, fancy_small):
     nove_poti = []
     zadnji = pot[-1]
     for p in [p for p in map if p[0] == zadnji]:
-        if ze_v_poti(p, pot):
-            continue
         if p[1] == "end":
             nove_poti += [pot + ["end"]]
         elif p[1] in small:
             if p[1] not in pot:
-                nove_poti += search1(pot + [p[1]])
-        else:
-            nove_poti += search1(pot + [p[1]])
-    return nove_poti
-
-#print(len(search1(["start"])))
-
-def search2(pot, fancy_small):
-    nove_poti = []
-    zadnji = pot[-1]
-    for p in [p for p in map if p[0] == zadnji]:
-        #if ze_v_poti(p, pot):
-            #continue
-        if p[1] == "end":
-            nove_poti += [pot + ["end"]]
-        elif p[1] in small:
-            if p[1] not in pot:
-                nove_poti += search2(pot + [p[1]], fancy_small)
+                nove_poti += search(pot + [p[1]], fancy_small)
             elif p[1] == fancy_small and len([c for c in pot if c == fancy_small]) < 2:
-                nove_poti += search2(pot + [p[1]], fancy_small)
+                nove_poti += search(pot + [p[1]], fancy_small)
         else:
-            nove_poti += search2(pot + [p[1]], fancy_small)
+            nove_poti += search(pot + [p[1]], fancy_small)
     return nove_poti
 
-#podvojene_poti = []
-#for c in small:
-#    podvojene_poti += search2(["start"], c)
-#nepodvojene_poti = []
-#for p in podvojene_poti:
-#    if p not in nepodvojene_poti:
-#        nepodvojene_poti.append(p)
-#print(len(nepodvojene_poti))
+podvojene_poti = []
+for c in small:
+    podvojene_poti += search(["start"], c)
+nepodvojene_poti = []
+for p in podvojene_poti:
+    if p not in nepodvojene_poti:
+        nepodvojene_poti.append(p)
 
-print(len(search2(["start"],"")))
+# --------------------------
+
+print("1. del: ")
+print(len(search(["start"],"")))
+print("2. del: ")
+print(len(nepodvojene_poti))
