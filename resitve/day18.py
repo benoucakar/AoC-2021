@@ -59,7 +59,6 @@ def reduce(s):
             else:
                 reduced = splitted[:]
 
-
 sNumbers = []
 with open("input/day18.txt") as inp:
     for vrst in inp:
@@ -81,12 +80,16 @@ def magnitude(S):
         S = helper(S)
     return S[0]
 
-print(magnitude(vsota))
-
 max_mag = 0
 for s1 in sNumbers:
     for s2 in sNumbers:
         if s1 == s2:
             continue
         max_mag = max(max_mag, magnitude(reduce(add_sNum(s1, s2))))
+
+# --------------------------
+
+print("1. del: ")
+print(magnitude(vsota))
+print("2. del: ")
 print(max_mag)
